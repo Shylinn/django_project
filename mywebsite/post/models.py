@@ -1,63 +1,200 @@
-# real_estate_app/models.py
-
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from django.contrib.auth.models import User, Group
-from django.utils import timezone
 
-class BusinessInfo(models.Model):
-    id_business = models.AutoField(primary_key=True,default=1),
-    title = models.CharField(max_length=255)
-    # Các thuộc tính khác của BusinessInfo
 
-class UserProfile(models.Model):
-    id_user = models.AutoField(primary_key=True,default=1)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15)
-    email = models.EmailField()
-    profile_image = models.URLField()
-    role = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True)
-    business = models.OneToOneField(BusinessInfo, on_delete=models.SET_NULL, null=True, blank=True)
+class Businessinfo(models.Model):
+    id_business = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    def __str__(self):
+        return self.title
 
-    @property
-    def business_title(self):
-        return self.business.title if self.business else None
+    class Meta:
+        managed = False
+        db_table = 'BusinessInfo'
 
-    @property
-    def username(self):
-        return self.user.username
 
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        managed = False
+        db_table = 'Category'
+
 
 class Post(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('active', 'Active'),
+    REGION_CHOICES = [
+        ('Đông', 'Đông'),
+        ('Tây', 'Tây'),
+        ('Nam', 'Nam'),
+        ('Bắc', 'Bắc'),
     ]
+    user = models.ForeignKey('Userprofile', models.DO_NOTHING, blank=True, null=True)
+    user_name = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    category = models.ForeignKey(Category, models.DO_NOTHING, blank=True, null=True)
+    title = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    body = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    image_url = models.CharField(max_length=255,db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    creation_time = models.DateTimeField(blank=True, null=True)
+    published_time = models.DateTimeField(blank=True, null=True)
+    status = models.CharField(max_length=10, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    area = models.FloatField(blank=True, null=True)
+    bedroom = models.IntegerField(blank=True, null=True)
+    toilet = models.IntegerField(blank=True, null=True)
+    furniture = models.IntegerField(blank=True, null=True)
+    facade = models.IntegerField(blank=True, null=True)
+    house_direction = models.CharField(
+        max_length=10,
+        choices=REGION_CHOICES,
+        
+    )
+    way = models.FloatField(blank=True, null=True)
+    pacony_direction = models.CharField(
+        max_length=10,
+        choices=REGION_CHOICES,
+        
+    )
+    floor = models.IntegerField(blank=True, null=True)
 
-    DIRECTION_CHOICES = [
-        ('east', 'Đông'),
-        ('west', 'Tây'),
-        ('south', 'Nam'),
-        ('north', 'Bắc'),
-    ]
+    def __str__(self):
+        return self.title
+    class Meta:
+        managed = False
+        db_table = 'Post'
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    body = models.TextField()
-    image_url = models.URLField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    creation_time = models.DateTimeField(auto_now_add=True)
-    published_time = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    area = models.FloatField()
-    bedroom = models.PositiveIntegerField()
-    toilet = models.PositiveIntegerField()
-    furniture = models.BooleanField()
-    facade = models.BooleanField()
-    house_direction = models.CharField(max_length=50, choices=DIRECTION_CHOICES)
-    way = models.FloatField()
-    pacony_direction = models.CharField(max_length=50, choices=DIRECTION_CHOICES)
-    floor = models.PositiveIntegerField()
+
+class Userprofile(models.Model):
+    id_user = models.AutoField(primary_key=True)
+    username = models.CharField(unique=True, max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    password = models.CharField(max_length=128, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    email = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    phone = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    profile_image = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    role_id = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    business = models.ForeignKey(Businessinfo, models.DO_NOTHING, blank=True, null=True)
+    def __str__(self):
+        return self.username
+    class Meta:
+        managed = False
+        db_table = 'UserProfile'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100, db_collation='SQL_Latin1_General_CP1_CI_AS')
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    first_name = models.CharField(max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    last_name = models.CharField(max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    email = models.CharField(max_length=254, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    object_repr = models.CharField(max_length=200, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    action_flag = models.SmallIntegerField()
+    change_message = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS')
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    model = models.CharField(max_length=100, db_collation='SQL_Latin1_General_CP1_CI_AS')
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    app = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    name = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    session_data = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS')
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'

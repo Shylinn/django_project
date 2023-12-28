@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'websitebds.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'QUANLYBDS_demo',
+        'NAME': 'bds_database_1',
         'USER':'',
         'PASSWORD': '',
         'HOST': 'SHYLIN\\SQLEXPRESS',
