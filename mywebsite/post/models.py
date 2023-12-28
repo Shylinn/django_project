@@ -40,7 +40,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, models.DO_NOTHING, blank=True, null=True)
     title = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     body = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-    image_url = models.CharField(max_length=255,db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    image_url = models.ImageField(upload_to='media/images/post')
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     creation_time = models.DateTimeField(blank=True, null=True)
     published_time = models.DateTimeField(blank=True, null=True)
@@ -76,7 +76,7 @@ class Userprofile(models.Model):
     password = models.CharField(max_length=128, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     email = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     phone = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-    profile_image = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    profile_image = models.ImageField(upload_to='media/images/profile')
     role_id = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     business = models.ForeignKey(Businessinfo, models.DO_NOTHING, blank=True, null=True)
     def __str__(self):
