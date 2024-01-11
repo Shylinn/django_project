@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h1>Cập nhật bài viết</h1>
+
+    {% if form.visible_fields %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+        </form>
+    {% else %}
+        <p>Không có trường nào cần cập nhật.</p>
+    {% endif %}
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+
+    $(document).ready(function(){
+        $('input').each(function(){
+            if($(this).val()==''){
+                $(this).parent().hide();
+            }
+
+        })}
+    )
+    </script>
+  
+{% endblock %}

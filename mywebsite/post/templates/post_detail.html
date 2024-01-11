@@ -1,0 +1,28 @@
+<!-- post_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Post Detail{% endblock %}</title>
+</head>
+<body>
+    {% load static %}
+    <h2>{% block heading %}Post Detail{% endblock %}</h2>
+    
+    <p>Title: {{ post.title }}</p>
+    <p>Content: {{ post.content }}</p>
+    <img src="{{ post.image_url}}" alt="{{ post.title }}">
+    
+    
+    <a href="{% url 'post_list' %}">Back to Post List</a>
+    
+    <hr>
+    
+    <h3>Preview</h3>
+    <p>{{ post.title }}</p>
+    <p>{{ post.content }}</p>
+    
+    <a href="{% url 'post_update' pk=post.pk %}">Edit</a>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h5>Bạn có chắc là muốn xóa bài post "{{ object }}"?</h5>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-danger">
+        <p><a href="{% url 'post_list' %}">Cancel</a></p>
+    </form>
+  
+{% endblock %}

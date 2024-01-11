@@ -19,6 +19,7 @@ from django.urls import path,include
 from post.urls import *
 
 urlpatterns = [
+    path('login/', LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('',include('post.urls'))
 ]

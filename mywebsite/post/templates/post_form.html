@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<style>
+  p{
+    padding-top:5px;
+  }
+  
+</style>
+
+      <div>
+        <h2>Create a New Post</h2>
+        <form method="post"  enctype="multipart/form-data" class="m-5">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-success">Create</button>
+       </form>
+      </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    // Thêm lớp 'custom-input' vào các trường input
+    $(document).ready(function(){
+     $('#id_category').change(function(){
+        if($(this).val()==1){
+          $('#id_bedroom').parent().show();
+          $('#id_toilet').parent().show();
+          $('#id_furniture').parent().show();
+          $('#id_facade').parent().show();
+          $('#id_house_direction').parent().show();
+          $('#id_way').parent().show();
+          $('#id_pacony_direction').parent().show();
+          $('#id_floor').parent().show();
+        }
+        else{
+          $('#id_bedroom').parent().hide();
+          $('#id_toilet').parent().hide();
+          $('#id_furniture').parent().hide();
+          $('#id_facade').parent().hide();
+          $('#id_house_direction').parent().hide();
+          $('#id_way').parent().hide();
+          $('#id_pacony_direction').parent().hide();
+          $('#id_floor').parent().hide();
+
+        }
+      })
+    });
+  
+  </script>
+    {% endblock %}

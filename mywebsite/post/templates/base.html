@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Your Bootstrap Page</title>
+</head>
+
+<body>
+    <style>
+  
+
+        .row {
+            height: 800px;
+        }
+         .custom-input, textarea, input[type='text'] {
+          width: 500px;
+    }
+    </style>
+
+<div class="container-fluid" >
+    <div class="row" style="height: 100vh;">
+        <!-- Phần bên trái -->
+        <div class="col-2 bg-light">
+
+            <ul class="nav flex-column" style="position: fixed;">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_create' %}">Tạo Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_list' %}">Danh Sách Bài Post</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Phần bên phải -->
+        <div class="col-10">
+            <!-- Nội dung chính ở đây -->
+            <div class="m-2">
+          
+            {% block content %}
+            
+            {% endblock %}
+      </div>
+            
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
+
+
+
+
+</body>
+<script>
+    $(document).ready(function () {
+      $('select').select2();
+  });
+    </script>
+</html>

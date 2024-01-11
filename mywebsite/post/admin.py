@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import *
+from django import forms
 
 admin.site.register(Businessinfo)
 admin.site.register(Category)
-admin.site.register(Post)
-admin.site.register(Userprofile)
-
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'user', 'category']
+    search_fields  = ['user']
+admin.site.register(Post,PostAdmin)
