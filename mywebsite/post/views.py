@@ -110,12 +110,38 @@ class HomePostListView(ListView):
     model = Post
     template_name = 'index.html'
     context_object_name = 'posts'
+    def get_queryset(self):
+        queryset = Post.objects.all()
+
+
+        # Lọc theo quận
+        district = self.request.GET.get('district', None)
+        if district:
+            queryset = queryset.filter(district=district)
+
+        # Lọc theo giá
+        price_range = self.request.GET.get('price_range', None)
+        if price_range:
+            price_range_tuple = tuple(map(int, price_range.split('-')))
+            queryset = queryset.filter(price__gte=price_range_tuple[0], price__lte=price_range_tuple[1])
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass any additional context variables here
+        return context
 
 class UserUpdateView(UpdateView):
     model = AuthUser
     template_name = 'profile_form.html'
     fields = ['username','first_name','last_name','email','phone','profile_image','business']
     success_url = reverse_lazy('post_list')
+
+class PropertiesPostListView(ListView):
+    model = Post
+    template_name = 'properties.html'
+    context_object_name = 'posts'
 
 
 

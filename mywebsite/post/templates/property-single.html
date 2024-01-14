@@ -60,7 +60,9 @@
               <li><a href="{% url 'logout' %}">Log Out</a></li>
               <li><a href="{% url 'post_list' %}">Your Post List</a></li>
               {% else %}
+              <li>
               <a href="{% url 'login' %}">Log In</a>
+            </li>
               {% endif %}             
             </ul>
 
