@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Untree.co" />
+    <meta name="author" content="AT.com.vn" />
     <link rel="shortcut icon" href="favicon.png" />
 
     <meta name="description" content="" />
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
 
     <title>
-      Property &mdash; Free Bootstrap 5 Website Template by Untree.co
+      Website số 1 về bất động sản
     </title>
   </head>
   <body>
@@ -54,7 +54,12 @@
               <li><a href="{% url 'index' %}">Home</a></li>
               <li><a href="{% url 'services' %}">Services</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'login' %}">Login</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Log Out</a></li>
+              <li><a href="{% url 'post_list' %}">Your Post List</a></li>
+              {% else %}
+              <a href="{% url 'login' %}">Log In</a>
+              {% endif %}   
             </ul>
 
             <a
@@ -72,7 +77,7 @@
 
     <div
       class="hero page-inner overlay"
-      style="background-image: url('images/hero_bg_3.jpg')"
+      style="background-image: url('{% static 'images/hero_bg_3.jpg' %}')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -107,35 +112,43 @@
           </div>
           <div class="col-lg-6">
             <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              enim pariatur similique debitis vel nisi qui reprehenderit totam?
-              Quod maiores.
+              AT.com.vn - Website hàng đầu về bất động sản tại Việt Nam
+              giúp nâng cao sự kết nối giữa người bán và người tìm kiếm bất động sản
+              với hàng triệu tin đăng mỗi tháng và những tin tức bất động sản luôn cập nhật,
+              sẵn sàng tư vấn giúp bạn có thể tự tin hơn khi đưa ra quyết định.
+
             </p>
             <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              saepe, explicabo nihil. Est, autem error cumque ipsum repellendus
-              veniam sed blanditiis unde ullam maxime veritatis perferendis
-              cupiditate, at non esse!
+              AT.com.vn cũng là nền tảng thương mại điện tử hàng đầu cung cấp cho khách hàng
+              trải nghiệm giao dịch bất động sản toàn diện -  đối tác đáng tin cậy
+              đối với các nhà mô giới, đại lý, doanh nghiệp và các chủ đầu tư trong việc
+              truyền thông, nghiên cứu thị trường dựa trên các dữ liệu lớn trực tuyến
+              bằng các giải pháp bán hàng và quản lý bán hàng, marketing trong lĩnh vực bất động sản.
+
             </p>
             <p class="text-black-50">
-              Enim, nisi labore exercitationem facere cupiditate nobis quod
-              autem veritatis quis minima expedita. Cumque odio illo iusto
-              reiciendis, labore impedit omnis, nihil aut atque, facilis
-              necessitatibus asperiores porro qui nam.
+              AT.com.vn ra mắt vào năm 2020 đã giúp thúc đẩy thị trường bất động sản trực tuyến trong nước
+              và minh bạch hóa việc tìm kiếm bất động sản ở Việt Nam một cách mạnh mẽ.
+              Trong những năm vừa qua, chúng tôi luôn tự cải thiện chính mình để phát triển thành
+              một công ty công nghệ bất động sản tăng trưởng cao với danh mục đầu tư mạnh mẽ gồm
+              cổng thông tin bất động sản hàng đầu ở các thị trường trọng điểm; các ứng dụng di động;
+              nền tảng quản lý bán hàng chất lượng cao cho nhà đầu tư.
+
             </p>
           </div>
           <div class="col-lg-6">
             <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              saepe, explicabo nihil. Est, autem error cumque ipsum repellendus
-              veniam sed blanditiis unde ullam maxime veritatis perferendis
-              cupiditate, at non esse!
+              AT - Công ty công nghệ bất động sản hàng đầu và là điểm đến ưa thích của 65 triệu
+              người tìm kiếm bất động sản mỗi tháng để tìm kiếm và sở hữu ngôi nhà mơ ước.
+              AT cung cấp cho người dùng hơn 5 triệu tin đăng bất động sản mỗi tháng,
+              tin tức thị trường và các giải pháp giúp họ tự tin đưa ra các quyết định.
+
             </p>
             <p class="text-black-50">
-              Enim, nisi labore exercitationem facere cupiditate nobis quod
-              autem veritatis quis minima expedita. Cumque odio illo iusto
-              reiciendis, labore impedit omnis, nihil aut atque, facilis
-              necessitatibus asperiores porro qui nam.
+              Chúng tôi tin tưởng vào sức mạnh của công nghệ và mong muốn góp phần
+              làm cho thế giới trở nên tốt đẹp hơn bằng việc kết nối cộng đồng
+              người mua và người bán bất động sản thông qua việc cung cấp một nền tảng thương mại điện tử.
+
             </p>
           </div>
         </div>
@@ -147,7 +160,7 @@
         <div class="row justify-content-between mb-5">
           <div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
             <div class="img-about dots">
-              <img src="images/hero_bg_3.jpg" alt="Image" class="img-fluid" />
+              <img src="{% static 'images/hero_bg_3.jpg' %}" alt="Image" class="img-fluid" />
             </div>
           </div>
           <div class="col-lg-4">
@@ -156,10 +169,10 @@
                 <span class="icon-home2"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Quality properties</h3>
+                <h3 class="heading">Đặc tính chất lượng</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  AT luôn đề cao việc kiểm tra pháp lý của từng bất động sản được đăng trên mỗi bài.
+
                 </p>
               </div>
             </div>
@@ -169,10 +182,10 @@
                 <span class="icon-person"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Top rated agents</h3>
+                <h3 class="heading">Các đại lý được đánh giá cao nhất</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  Thông tin của từng nhà môi giới, đại lý, doanh nghiệp đều được kiểm duyệt và tuân theo pháp luật
+
                 </p>
               </div>
             </div>
@@ -182,10 +195,12 @@
                 <span class="icon-security"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Easy and safe</h3>
+                <h3 class="heading">Dễ dàng và an toàn</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  Chúng tôi luôn cố gắng mang đến cho khách hàng trải nghiệp giao dịch trực tuyến
+                  tích hợp với vô số các loại hình bất động sản đa dạng chủng loại.
+
+
                 </p>
               </div>
             </div>
@@ -199,7 +214,7 @@
         <div class="row justify-content-between mb-5">
           <div class="col-lg-7 mb-5 mb-lg-0">
             <div class="img-about dots">
-              <img src="images/hero_bg_2.jpg" alt="Image" class="img-fluid" />
+              <img src="{% static 'images/hero_bg_2.jpg' %}" alt="Image" class="img-fluid" />
             </div>
           </div>
           <div class="col-lg-4">
@@ -208,10 +223,13 @@
                 <span class="icon-home2"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Quality properties</h3>
+                <h3 class="heading">Đặc điểm về con người của chúng tôi</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  Để định nghĩa AT là ai - thông qua lời nói hay cách ứng xử trong
+                  nhiều trường hợp khác nhau - thì thực chất, chúng tôi Gần gũi, Vui vẻ và Đồng lòng.
+                  Đây là những đặc tính chính và nổi bật trong từng bước đường phát triển của AT.
+
+
                 </p>
               </div>
             </div>
@@ -221,10 +239,13 @@
                 <span class="icon-person"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Top rated agents</h3>
+                <h3 class="heading">Giá trị Cốt lõi</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  AT luôn đề cao việc hiểu khách hàng chính là
+                  chìa khóa để lãnh đạo thành công.
+                  Chúng tôi luôn suy nghĩ là làm thế nào để mang lại trải nghiệm tốt nhất cho nhân viên, đối tác và người dùng.
+
+
                 </p>
               </div>
             </div>
@@ -234,10 +255,11 @@
                 <span class="icon-security"></span>
               </span>
               <div class="feature-text">
-                <h3 class="heading">Easy and safe</h3>
+                <h3 class="heading">Sẵn sàng</h3>
                 <p class="text-black-50">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum iste.
+                  Tinh thần sẵn sàng đối diện với khó khăn là
+                  một trong những tố chất quan trọng tạo nên AT ngày hôm nay
+
                 </p>
               </div>
             </div>
@@ -249,13 +271,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-            <img src="images/img_1.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-4 mt-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <img src="images/img_3.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'images/img_3.jpg' %}" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-            <img src="images/img_2.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'images/img_2.jpg' %}" alt="Image" class="img-fluid" />
           </div>
         </div>
         <div class="row section-counter mt-5">
@@ -266,9 +288,9 @@
           >
             <div class="counter-wrap mb-5 mb-lg-0">
               <span class="number"
-                ><span class="countup text-primary">2917</span></span
+                ><span class="countup text-primary">3004</span></span
               >
-              <span class="caption text-black-50"># of Buy Properties</span>
+              <span class="caption text-black-50"># Nhà đất bán</span>
             </div>
           </div>
           <div
@@ -278,9 +300,9 @@
           >
             <div class="counter-wrap mb-5 mb-lg-0">
               <span class="number"
-                ><span class="countup text-primary">3918</span></span
+                ><span class="countup text-primary">2802</span></span
               >
-              <span class="caption text-black-50"># of Sell Properties</span>
+              <span class="caption text-black-50"># Nhà đất thuê</span>
             </div>
           </div>
           <div
@@ -290,9 +312,9 @@
           >
             <div class="counter-wrap mb-5 mb-lg-0">
               <span class="number"
-                ><span class="countup text-primary">38928</span></span
+                ><span class="countup text-primary">1993</span></span
               >
-              <span class="caption text-black-50"># of All Properties</span>
+              <span class="caption text-black-50"># Dự án</span>
             </div>
           </div>
           <div
@@ -302,9 +324,9 @@
           >
             <div class="counter-wrap mb-5 mb-lg-0">
               <span class="number"
-                ><span class="countup text-primary">1291</span></span
+                ><span class="countup text-primary">4876</span></span
               >
-              <span class="caption text-black-50"># of Agents</span>
+              <span class="caption text-black-50"># Người dùng</span>
             </div>
           </div>
         </div>
@@ -321,9 +343,9 @@
           </div>
           <div class="col-md-6 text-md-end">
             <div id="testimonial-nav">
-              <span class="prev" data-controls="prev">Prev</span>
+              <span class="prev" data-controls="prev">Trước</span>
 
-              <span class="next" data-controls="next">Next</span>
+              <span class="next" data-controls="next">Sau</span>
             </div>
           </div>
         </div>
@@ -336,18 +358,17 @@
             <div class="item">
               <div class="testimonial">
                 <img
-                  src="images/person_1-min.jpg"
+                  src="{% static 'images/person_1-min.jpg' %}"
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
                 <h3 class="h5 text-primary">James Smith</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
+                <p class="text-black-50">Nhà thiết kế, Đồng sáng lập</p>
 
                 <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
+                  Bạn không thể chỉ hỏi khách hàng xem họ muốn gì và rồi cố đem nó cho họ.
+                  Tới lúc bạn hoàn thiện nó, họ đã muốn thứ mới mẻ khác rồi.
+
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
@@ -370,18 +391,17 @@
             <div class="item">
               <div class="testimonial">
                 <img
-                  src="images/person_2-min.jpg"
+                  src="{% static 'images/person_2-min.jpg' %}"
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
                 <h3 class="h5 text-primary">Carol Houston</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
+                <p class="text-black-50">Nhà thiết kế, Đồng sáng lập</p>
 
                 <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
+                  Bạn phải chịu đựng áp lực. Nếu bạn không thể chịu được áp lực,
+                  bạn không thể trở thành một doanh nhân lớn hay thành đạt.
+
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
@@ -404,18 +424,19 @@
             <div class="item">
               <div class="testimonial">
                 <img
-                  src="images/person_3-min.jpg"
+                  src="{% static 'images/person_3-min.jpg' %}"
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
                 <h3 class="h5 text-primary">Synthia Cameron</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
+                <p class="text-black-50">Giám đốc kinh doanh, Đồng sáng lập</p>
 
                 <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
+                  Chúng tôi luôn học hỏi từ đối thủ, về mọi thứ có thể học hỏi được,
+                  nhưng chúng tôi không bao giờ đi sao chép. Với chúng tôi, sao chép có nghĩa là chết.
+                  Cạnh tranh cũng giống như chơi một ván cờ. Khi chúng ta thua, chúng ta có thể chơi lại một ván cờ khác.
+                  Cả hai người chơi đừng nên chiến đấu triệt hạ lẫn nhau
+
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
@@ -438,18 +459,17 @@
             <div class="item">
               <div class="testimonial">
                 <img
-                  src="images/person_4.jpg"
+                  src="{% static 'images/person_4-min.jpg' %}"
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
                 <h3 class="h5 text-primary">Davin Smith</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
+                <p class="text-black-50">Chuyên gia kinh tế, đồng sáng lập</p>
 
                 <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
+                  Trong một thế giới đang thay đổi rất nhanh chóng,
+                  lộ trình duy nhất đưa bạn đến thất bại là không dám mạo hiểm.
+
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
@@ -479,12 +499,12 @@
           <div class="col-lg-4">
             <div class="widget">
               <h3>Contact</h3>
-              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+              <address>123 Ngô Thời Nhiệm, Phường 30, Quận 1</address>
               <ul class="list-unstyled links">
-                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li><a href="tel://028 45678932">028 45678932</a></li>
+                <li><a href="tel://028 73246231">028 73246231</a></li>
                 <li>
-                  <a href="mailto:info@mydomain.com">info@mydomain.com</a>
+                  <a href="mailto:info@atrealestate.com">info@atrealestate.com</a>
                 </li>
               </ul>
             </div>
@@ -564,14 +584,9 @@
               <script>
                 document.write(new Date().getFullYear());
               </script>
-              . All Rights Reserved. &mdash; Designed with love by
-              <a href="https://untree.co">Untree.co</a>
-              <!-- License information: https://untree.co/license/ -->
+              . All Rights Reserved.
             </p>
-            <div>
-              Distributed by
-              <a href="https://themewagon.com/" target="_blank">themewagon</a>
-            </div>
+         
           </div>
         </div>
       </div>

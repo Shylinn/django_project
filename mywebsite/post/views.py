@@ -7,18 +7,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Post, Huyen,AuthUser
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
 
 
 
-
-# Create your views here.
-def index(request):
-    return render(request,'index.html')
 def about(request):
     return render(request,'about.html')
 def services(request):
@@ -31,7 +28,7 @@ def my_view(request):
     context = {
         'user': request.user
     }
-    return render(request, 'post_list.html', context)
+    return render(request, 'base.html', context)
 
 
 class PostListView(LoginRequiredMixin,ListView):
@@ -51,8 +48,13 @@ class PostListView(LoginRequiredMixin,ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'property-single.html'
     context_object_name = 'post'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.object.user_id
+        context['profile'] = AuthUser.objects.get(id=user_id)
+        return context
 
 class PostCreateView(CreateView):
     model = Post
@@ -95,6 +97,25 @@ class LoginView(View):
             return redirect('login')
 
 
+
+
+
+class LogoutView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('login')  
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('index')  
+
+class HomePostListView(ListView):
+    model = Post
+    template_name = 'index.html'
+    context_object_name = 'posts'
+
+class UserUpdateView(UpdateView):
+    model = AuthUser
+    template_name = 'profile_form.html'
+    fields = ['username','first_name','last_name','email','phone','profile_image','business']
+    success_url = reverse_lazy('post_list')
 
 
 

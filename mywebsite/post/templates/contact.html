@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
 
     <title>
-      Property &mdash; Free Bootstrap 5 Website Template by Untree.co
+      Website số 1 về bất động sản
     </title>
   </head>
   <body>
@@ -55,7 +55,12 @@
               <li><a href="{% url 'index' %}">Home</a></li>
               <li><a href="{% url 'services' %}">Services</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'login' %}">Login</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Log Out</a></li>
+              <li><a href="{% url 'post_list' %}">Your Post List</a></li>
+              {% else %}
+              <a href="{% url 'login' %}">Log In</a>
+              {% endif %}   
             </ul>
 
             <a

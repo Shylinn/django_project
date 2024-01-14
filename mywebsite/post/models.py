@@ -110,20 +110,20 @@ class Post(models.Model):
    
 
 
-# class Userprofile(models.Model):
-#     id_user = models.AutoField(primary_key=True)
-#     username = models.CharField(unique=True, max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-#     password = models.CharField(max_length=128, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-#     email = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-#     phone = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-#     profile_image = models.ImageField(upload_to='media/images/profile')
-#     role_id = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
-#     business = models.ForeignKey(Businessinfo, models.DO_NOTHING, blank=True, null=True)
-#     def __str__(self):
-#         return self.username
-#     class Meta:
-#         managed = False
-#         db_table = 'UserProfile'
+class Userprofile(models.Model):
+     id_user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
+     username = models.CharField(unique=True, max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+     password = models.CharField(max_length=128, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+     email = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+     phone = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+     profile_image = models.ImageField(upload_to='images')
+     role_id = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+     business = models.ForeignKey(Businessinfo, models.DO_NOTHING, blank=True, null=True)
+     def __str__(self):
+         return self.username
+     class Meta:
+         managed = False
+         db_table = 'UserProfile'
 
 
 class AuthGroup(models.Model):
@@ -164,6 +164,10 @@ class AuthUser(models.Model):
     first_name = models.CharField(max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
     last_name = models.CharField(max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS')
     email = models.CharField(max_length=254, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    phone = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    profile_image = models.ImageField(upload_to='images')
+    # role_id = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    business = models.ForeignKey(Businessinfo, models.DO_NOTHING, blank=True, null=True)
     is_staff = models.BooleanField()
     is_active = models.BooleanField()
     date_joined = models.DateTimeField()
@@ -171,6 +175,8 @@ class AuthUser(models.Model):
     class Meta:
         managed = False
         db_table = 'auth_user'
+    def __str__(self):
+        return self.username
 
 
 class AuthUserGroups(models.Model):

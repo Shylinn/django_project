@@ -19,17 +19,32 @@
     }
     </style>
 
+{% if user.is_authenticated %}
+
 <div class="container-fluid" >
     <div class="row" style="height: 100vh;">
         <!-- Phần bên trái -->
         <div class="col-2 bg-light">
-
+            
             <ul class="nav flex-column" style="position: fixed;">
+                <li class="nav-item">
+                   <h5>Xin chào {{user.username}}</h5   >
+                </li>
+                <li class="nav-item">
+                    <a href="{%url 'index' %}" class="nav-link">Trang chủ</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'post_create' %}">Tạo Post</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'post_list' %}">Danh Sách Bài Post</a>
+                </li>
+           
+                <li class="nav-item">
+                    <a href="{%url 'profile' pk=user.id %}" class="nav-link">Thông tin cá nhân</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{%url 'logout' %}" class="nav-link">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -45,6 +60,10 @@
       </div>
             
 </div>
+{% else %}
+<p>Bạn cần đăng nhập để tạo bài viết mới.</p>
+<a href="{% url 'login' %}">Đăng nhập</a>
+{% endif %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
